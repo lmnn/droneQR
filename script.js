@@ -37,7 +37,7 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.fillStyle = `#${bgColor}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   
-  const qrUrl = `https://chart.googleapis.com/chart?chs=64x64&cht=qr&chl=${encodeURIComponent(inputName)}`;
+  const qrUrl = `https://chart.googleapis.com/chart?chs=88x88&cht=qr&chl=${encodeURIComponent(inputName)}`;
   
   // Create QR code image
   const qrImage = new Image();
@@ -46,7 +46,7 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   
   qrImage.onload = function() {
     // Draw QR code on the canvas
-    ctx.drawImage(qrImage, 112, 4); // Position the QR code on the canvas
+    ctx.drawImage(qrImage, 101, -7); // Position the QR code on the canvas
     
     // Create a new image from the canvas data
     const qrWithBackground = canvas.toDataURL();
