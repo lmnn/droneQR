@@ -1,9 +1,10 @@
 # droneQR
 
-![image](https://github.com/timmalahov/droneQR/assets/61071739/1d7ef796-59c9-474e-94ab-5c12d2c5d561)
+
+![whoop_qr](https://github.com/lmnn/droneQR/assets/5864652/01112534-2aa4-430e-801a-7d22a2e538ba)
 
 
-QR custom logo generator for Betaflight and Quicksilver OSD.Green image background is needed for Betaflight, transparent - for Quicksilver.
+QR custom logo generator for Betaflight and Quicksilver OSD. A green image background is needed for Betaflight, transparent - for Quicksilver.
 
 Hosted here
 https://qrwhoop.000webhostapp.com/
