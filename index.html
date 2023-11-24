@@ -1,43 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<title>Whoop QR Code Generator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
-
-<body class="w3-dark-gray">
-  <div class="w3-container w3-center w3-theme-d2">
-    <h1>Whoop QR Code Generator</h1>
-    <img src="whoop.png" class="w3-image w3-opacity-max w3-padding-16" style="width: 3rem; height: auto;">
-  </div>
-
-  <div class="w3-container w3-padding-16 w3-auto" style="max-width: 40rem;">
-    <form id="qrForm">
-      <div>
-        <label class="w3-text-theme"><b>Enter Name:</b>
-          <input class="w3-input" type="text" id="nameInput" required autofocus maxlength="16" autocomplete='off'>
-        </label>
-      </div>
-      <div>
-        <label><img src="Betaflight.svg" class="w3-image w3-padding-16" style="width: 3rem; height: auto;">
-          <input class="w3-radio" type="radio" name="firmware" value="Betaflight" checked>
-        </label>
-        <label><img src="Quicksilver.svg" class="w3-image w3-padding-16  w3-margin-left"
-            style="width: 3rem; height: auto;">
-          <input class="w3-radio" type="radio" name="firmware" value="Quicksilver">
-        </label>
-      </div>
-      <div>
-        <button type="submit" class="w3-btn w3-input w3-theme-d2 w3-large w3-margin-top w3-border-0">Generate
-          QR</button>
-      </div>
-    </form>
-
-    <div id="qrcode" class="w3-image w3-btn w3-margin-top w3-bar" style="display: none;">
-      <script src="script.js"></script>
+  <title>Whoop QR Code Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link
+    rel="stylesheet"
+    href="https://www.w3schools.com/lib/w3-theme-green.css"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <link href="https://fonts.cdnfonts.com/css/sf-pixelate" rel="stylesheet" />
+  <body class="w3-dark-gray">
+    <div class="w3-container w3-center w3-theme-d2">
+      <h1>Whoop QR Code Generator</h1>
+      <img
+        src="whoop.png"
+        class="w3-image w3-opacity-max w3-padding-16"
+        style="width: 3rem; height: auto"
+      />
     </div>
-  </div>
 
-</body>
+    <div class="w3-container w3-padding-16 w3-auto" style="max-width: 40rem">
+      <form id="qrForm">
+        <div>
+          <label class="w3-text-theme"
+            ><b>Enter Name:</b>
+            <input
+              class="w3-input"
+              type="text"
+              id="nameInput"
+              required
+              autofocus
+              maxlength="16"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+        <div>
+          <label
+            ><img
+              src="Betaflight.svg"
+              class="w3-image w3-padding-16"
+              style="width: 3rem; height: auto"
+            />
+            <input
+              class="w3-radio"
+              type="radio"
+              name="firmware"
+              value="Betaflight"
+              checked
+            />
+          </label>
+          <label
+            ><img
+              src="Quicksilver.svg"
+              class="w3-image w3-padding-16 w3-margin-left"
+              style="width: 3rem; height: auto"
+            />
+            <input
+              class="w3-radio"
+              type="radio"
+              name="firmware"
+              value="Quicksilver"
+            />
+          </label>
+        </div>
+        <div>
+          <button
+            type="submit"
+            class="w3-btn w3-input w3-theme-d2 w3-large w3-margin-top w3-border-0"
+          >
+            Generate QR
+          </button>
+        </div>
+      </form>
+
+      <div
+        id="qrcode"
+        class="w3-image w3-btn w3-margin-top w3-bar"
+        style="display: none"
+      >
+        <script src="script.js"></script>
+      </div>
+    </div>
+  </body>
 </html>
