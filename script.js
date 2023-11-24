@@ -25,9 +25,11 @@ function showLoader() {
 
 function generateQRCode(inputName, firmwareType, qrElement) {
   let bgColor = "ffffff00"; // QS Transparent background
+  let bgImageDataColor = 0;
 
   if (firmwareType === "Betaflight") {
     bgColor = "00ff00"; // BF Green background
+    bgImageDataColor = 4278255360;
   }
 
   const canvas = document.createElement("canvas");
@@ -35,26 +37,49 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   canvas.height = 72;
   const ctx = canvas.getContext("2d");
 
+  const generatedQr = new QRious({
+    value: inputName,
+    size: canvas.height,
+  });
+
   // Fill the canvas with the background color
   ctx.fillStyle = `#${bgColor}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const qrUrl = `https://chart.googleapis.com/chart?chs=88x88&cht=qr&chl=${encodeURIComponent(
-    inputName
-  )}`;
+  ctx.textRendering = "geometricPrecision";
+  ctx.font = "24px DePixel";
+  ctx.fillStyle = "white";
+  ctx.fillText(inputName, 76, 42, 208);
 
-  // Create QR code image
-  const qrImage = new Image();
-  qrImage.crossOrigin = "anonymous";
-  qrImage.src = qrUrl;
+  // Get pixel data from canvas
+  const data32 = new Uint32Array(
+    ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+  );
 
-  qrImage.onload = function () {
-    // Draw QR code on the canvas
-    ctx.drawImage(qrImage, 101, -7); // Position the QR code on the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Refill the canvas with the background color
+  ctx.fillStyle = `#${bgColor}`;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Create a new image from the canvas data
+  // Draw QR code on the canvas
+  ctx.drawImage(generatedQr.image, 0, 0);
+
+  // Walk through array of canvas pixel data and draw only the ones that aren't the background color
+  for (let i = 0; i < data32.length; i++) {
+    if (data32[i] !== bgImageDataColor) {
+      ctx.fillStyle = `#fff`;
+      ctx.fillRect(i % canvas.width, (i / canvas.width) | 0, 1, 1);
+
+      ctx.fillStyle = `#000`;
+      ctx.fillRect((i % canvas.width) + 1, (i / canvas.width + 1) | 0, 1, 1);
+    }
+  }
+
+  // Create a new image from the canvas data
+  setTimeout(() => {
+    // Draw QR code on the canvas again in case gpu wasn't done with the process the first time
+    ctx.drawImage(generatedQr.image, 0, 0);
     const qrWithBackground = canvas.toDataURL();
-
     // Create a new image element with the QR code and background
     const finalQRImage = new Image();
     finalQRImage.src = qrWithBackground;
@@ -70,12 +95,11 @@ function generateQRCode(inputName, firmwareType, qrElement) {
       finalQRImage.addEventListener("click", function () {
         const downloadLink = document.createElement("a");
         downloadLink.href = qrWithBackground;
-        downloadLink.download =
-          firmwareType + "_" + inputName.trim() + "_qr.png";
+        downloadLink.download = firmwareType + "_" + inputName.trim() + "_qr.png";
         downloadLink.click();
       });
     } else {
       qrElement.style.display = "none";
     }
-  };
+  }, 0)
 }

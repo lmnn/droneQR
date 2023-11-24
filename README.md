@@ -1,8 +1,9 @@
 # droneQR
 
-![paveikslas](https://github.com/lmnn/droneQR/assets/5864652/08e07ea9-8305-46a6-9bdf-4b52f5164545)
+![image](https://github.com/timmalahov/droneQR/assets/61071739/1d7ef796-59c9-474e-94ab-5c12d2c5d561)
 
-QR custom logo generator for Betaflight and Quicksilver OSD. Uses Google Chart API for QR.  Green image background is needed for Betaflight, transparent - for Quicksilver.
+
+QR custom logo generator for Betaflight and Quicksilver OSD.Green image background is needed for Betaflight, transparent - for Quicksilver.
 
 Hosted here
 https://qrwhoop.000webhostapp.com/
