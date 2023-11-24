@@ -25,7 +25,7 @@ function showLoader() {
 
 function generateQRCode(inputName, firmwareType, qrElement) {
   let bgColor = "ffffff00"; // QS Transparent background
-  let bgImageDataColor = 4278190080;
+  let bgImageDataColor = 0;
 
   if (firmwareType === "Betaflight") {
     bgColor = "00ff00"; // BF Green background
@@ -35,7 +35,7 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   const canvas = document.createElement("canvas");
   canvas.width = 288;
   canvas.height = 72;
-  const ctx = canvas.getContext("2d", { alpha: false });
+  const ctx = canvas.getContext("2d");
 
   const generatedQr = new QRious({
     value: inputName,
