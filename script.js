@@ -49,7 +49,7 @@ async function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.textRendering = "geometricPrecision";
-  ctx.font = "24px SF Pixelate Shaded";
+  ctx.font = "24px DePixel";
   ctx.fillStyle = "white";
   ctx.fillText(inputName, 76, 42, 208);
 
