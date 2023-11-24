@@ -23,7 +23,7 @@ function showLoader() {
   qrElement.innerHTML = `<img class="w3-spin" src="qr.png" style="height:2rem;opacity:0.5">`;
 }
 
-async function generateQRCode(inputName, firmwareType, qrElement) {
+function generateQRCode(inputName, firmwareType, qrElement) {
   let bgColor = "ffffff00"; // QS Transparent background
   let bgImageDataColor = 4278190080;
 
@@ -41,8 +41,6 @@ async function generateQRCode(inputName, firmwareType, qrElement) {
     value: inputName,
     size: canvas.height,
   });
-
-  const generatedQrImage = await generatedQr.image;
 
   // Fill the canvas with the background color
   ctx.fillStyle = `#${bgColor}`;
@@ -63,8 +61,11 @@ async function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.fillStyle = `#${bgColor}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  // Draw QR code on the canvas
+  ctx.drawImage(generatedQr.image, 0, 0);
+
   // Walk through array of canvas pixel data and draw only the ones that aren't the background color
-  for (i = 0; i < data32.length; i++) {
+  for (let i = 0; i < data32.length; i++) {
     if (data32[i] !== bgImageDataColor) {
       ctx.fillStyle = `#fff`;
       ctx.fillRect(i % canvas.width, (i / canvas.width) | 0, 1, 1);
@@ -74,31 +75,31 @@ async function generateQRCode(inputName, firmwareType, qrElement) {
     }
   }
 
-  // Draw QR code on the canvas
-  ctx.drawImage(generatedQrImage, 0, 0);
-
   // Create a new image from the canvas data
-  const qrWithBackground = canvas.toDataURL();
+  setTimeout(() => {
+    // Draw QR code on the canvas again in case gpu wasn't done with the process the first time
+    ctx.drawImage(generatedQr.image, 0, 0);
+    const qrWithBackground = canvas.toDataURL();
+    // Create a new image element with the QR code and background
+    const finalQRImage = new Image();
+    finalQRImage.src = qrWithBackground;
+    finalQRImage.style.width = "100%";
 
-  // Create a new image element with the QR code and background
-  const finalQRImage = new Image();
-  finalQRImage.src = qrWithBackground;
-  finalQRImage.style.width = "100%";
+    // Display the final QR code image or hide if input is empty
+    qrElement.innerHTML = ""; // Clear previous content
 
-  // Display the final QR code image or hide if input is empty
-  qrElement.innerHTML = ""; // Clear previous content
+    if (inputName.trim() !== "") {
+      qrElement.appendChild(finalQRImage);
 
-  if (inputName.trim() !== "") {
-    qrElement.appendChild(finalQRImage);
-
-    // Enable download by clicking the QR code image
-    finalQRImage.addEventListener("click", function () {
-      const downloadLink = document.createElement("a");
-      downloadLink.href = qrWithBackground;
-      downloadLink.download = firmwareType + "_" + inputName.trim() + "_qr.png";
-      downloadLink.click();
-    });
-  } else {
-    qrElement.style.display = "none";
-  }
+      // Enable download by clicking the QR code image
+      finalQRImage.addEventListener("click", function () {
+        const downloadLink = document.createElement("a");
+        downloadLink.href = qrWithBackground;
+        downloadLink.download = firmwareType + "_" + inputName.trim() + "_qr.png";
+        downloadLink.click();
+      });
+    } else {
+      qrElement.style.display = "none";
+    }
+  }, 0)
 }
