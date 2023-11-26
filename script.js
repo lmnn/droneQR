@@ -68,13 +68,15 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.drawImage(generatedQr.image, 0, 0);
 
   // Walk through array of canvas pixel data and draw only the ones that aren't the background color
-  for (let i = 0; i < data32.length; i++) {
-    if (data32[i] !== bgImageDataColor) {
-      ctx.fillStyle = `#fff`;
-      ctx.fillRect(i % canvas.width, (i / canvas.width) | 0, 1, 1);
+  if (!disableText) {
+    for (let i = 0; i < data32.length; i++) {
+      if (data32[i] !== bgImageDataColor) {
+        ctx.fillStyle = `#fff`;
+        ctx.fillRect(i % canvas.width, (i / canvas.width) | 0, 1, 1);
 
-      ctx.fillStyle = `#000`;
-      ctx.fillRect((i % canvas.width) + 1, (i / canvas.width + 1) | 0, 1, 1);
+        ctx.fillStyle = `#000`;
+        ctx.fillRect((i % canvas.width) + 1, (i / canvas.width + 1) | 0, 1, 1);
+      }
     }
   }
 
