@@ -22,14 +22,22 @@
         <input class="w3-input" type="text" id="nameInput" required autofocus maxlength="16" autocomplete='off'>
       </label>
     </div>
-    <div>
-      <label><img src="Betaflight.svg" class="w3-image w3-padding-16" style="width: 3rem; height: auto;">
-        <input class="w3-radio" type="radio" name="firmware" value="Betaflight" checked>
-      </label>
-      <label><img src="Quicksilver.svg" class="w3-image w3-padding-16  w3-margin-left"
-                  style="width: 3rem; height: auto;">
-        <input class="w3-radio" type="radio" name="firmware" value="Quicksilver">
-      </label>
+    <div class="w3-row">
+      <div class="w3-quarter w3-center">
+        <label for="bfInput"><img src="Betaflight.svg" class="w3-image w3-padding-16 w3-margin-top"
+            style="width: 3rem; height: auto;"></label>
+        <input class="w3-radio" id="bfInput" type="radio" name="firmware" value="Betaflight" checked>
+      </div>
+      <div class="w3-quarter w3-center">
+        <label for="qsInput"><img src="Quicksilver.svg" class="w3-image w3-padding-16 w3-margin-top"
+            style="width: 3rem; height: auto;"></label>
+        <input class="w3-radio" id="qsInput" type="radio" name="firmware" value="Quicksilver">
+      </div>
+      <div class="w3-quarter" style="height: 1px;"></div><!-- spacer -->
+      <div class="w3-quarter w3-container w3-center w3-margin-top">
+        <label class="w3-label w3-text-theme w3-center " for="hideName">Hide Name</label>
+        <input class="w3-check" type="checkbox" id="hideName">
+      </div>
     </div>
     <div>
       <button type="submit" class="w3-btn w3-input w3-theme-d2 w3-large w3-margin-top w3-border-0">Generate

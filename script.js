@@ -46,10 +46,13 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.fillStyle = `#${bgColor}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.textRendering = "geometricPrecision";
-  ctx.font = "24px DePixel";
-  ctx.fillStyle = "white";
-  ctx.fillText(inputName, 76, 42, 208);
+  const disableText = document.getElementById('hideName').checked;
+  if (!disableText) {
+    ctx.textRendering = "optimizeSpeed";
+    ctx.font = "24px DePixel";
+    ctx.fillStyle = "white";
+    ctx.fillText(inputName, 76, 42, 208);
+  }
 
   // Get pixel data from canvas
   const data32 = new Uint32Array(
