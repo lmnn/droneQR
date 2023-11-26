@@ -46,10 +46,15 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.fillStyle = `#${bgColor}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  //get selected font
+  const fontSelection = document.getElementById('fontSelection');
+  const selectedFont = fontSelection.value;
+  //get option to hide Name
   const disableText = document.getElementById('hideName').checked;
+  
   if (!disableText) {
     ctx.textRendering = "optimizeSpeed";
-    ctx.font = "24px DePixel";
+    ctx.font = selectedFont;
     ctx.fillStyle = "white";
     ctx.fillText(inputName, 76, 42, 208);
   }
