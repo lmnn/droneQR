@@ -47,33 +47,27 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   //get selected font
-  const fontSelection = document.getElementById('fontSelection');
+  const fontSelection = document.getElementById("fontSelection");
   const selectedFont = fontSelection.value;
   //get option to hide Name
-  const disableText = document.getElementById('hideName').checked;
-  
+  const disableText = document.getElementById("hideName").checked;
+
   if (!disableText) {
     ctx.textRendering = "optimizeSpeed";
     ctx.font = selectedFont;
     ctx.fillStyle = "white";
     ctx.fillText(inputName, 76, 42, 208);
-  }
 
-  // Get pixel data from canvas
-  const data32 = new Uint32Array(
-    ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
-  );
+    // Get pixel data from canvas
+    const data32 = new Uint32Array(
+      ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+    );
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // Refill the canvas with the background color
-  ctx.fillStyle = `#${bgColor}`;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Refill the canvas with the background color
+    ctx.fillStyle = `#${bgColor}`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Draw QR code on the canvas
-  ctx.drawImage(generatedQr.image, 0, 0);
-
-  // Walk through array of canvas pixel data and draw only the ones that aren't the background color
-  if (!disableText) {
     for (let i = 0; i < data32.length; i++) {
       if (data32[i] !== bgImageDataColor) {
         ctx.fillStyle = `#fff`;
@@ -84,6 +78,9 @@ function generateQRCode(inputName, firmwareType, qrElement) {
       }
     }
   }
+
+  // Draw QR code on the canvas
+  ctx.drawImage(generatedQr.image, 0, 0);
 
   // Create a new image from the canvas data
   setTimeout(() => {
@@ -105,11 +102,12 @@ function generateQRCode(inputName, firmwareType, qrElement) {
       finalQRImage.addEventListener("click", function () {
         const downloadLink = document.createElement("a");
         downloadLink.href = qrWithBackground;
-        downloadLink.download = firmwareType + "_" + inputName.trim() + "_qr.png";
+        downloadLink.download =
+          firmwareType + "_" + inputName.trim() + "_qr.png";
         downloadLink.click();
       });
     } else {
       qrElement.style.display = "none";
     }
-  }, 0)
+  }, 0);
 }
