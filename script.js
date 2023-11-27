@@ -46,34 +46,41 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   ctx.fillStyle = `#${bgColor}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.textRendering = "geometricPrecision";
-  ctx.font = "24px DePixel";
-  ctx.fillStyle = "white";
-  ctx.fillText(inputName, 76, 42, 208);
+  //get selected font
+  const fontSelection = document.getElementById("fontSelection");
+  const selectedFont = fontSelection.value;
+  //get option to hide Name
+  const disableText = document.getElementById("hideName").checked;
 
-  // Get pixel data from canvas
-  const data32 = new Uint32Array(
-    ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
-  );
+  if (!disableText) {
+    ctx.textRendering = "optimizeSpeed";
+    ctx.font = selectedFont;
+    ctx.fillStyle = "white";
+    ctx.fillText(inputName, 76, 42, 208);
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // Refill the canvas with the background color
-  ctx.fillStyle = `#${bgColor}`;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Get pixel data from canvas
+    const data32 = new Uint32Array(
+      ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+    );
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Refill the canvas with the background color
+    ctx.fillStyle = `#${bgColor}`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < data32.length; i++) {
+      if (data32[i] !== bgImageDataColor) {
+        ctx.fillStyle = `#fff`;
+        ctx.fillRect(i % canvas.width, (i / canvas.width) | 0, 1, 1);
+
+        ctx.fillStyle = `#000`;
+        ctx.fillRect((i % canvas.width) + 1, (i / canvas.width + 1) | 0, 1, 1);
+      }
+    }
+  }
 
   // Draw QR code on the canvas
   ctx.drawImage(generatedQr.image, 0, 0);
-
-  // Walk through array of canvas pixel data and draw only the ones that aren't the background color
-  for (let i = 0; i < data32.length; i++) {
-    if (data32[i] !== bgImageDataColor) {
-      ctx.fillStyle = `#fff`;
-      ctx.fillRect(i % canvas.width, (i / canvas.width) | 0, 1, 1);
-
-      ctx.fillStyle = `#000`;
-      ctx.fillRect((i % canvas.width) + 1, (i / canvas.width + 1) | 0, 1, 1);
-    }
-  }
 
   // Create a new image from the canvas data
   setTimeout(() => {
@@ -95,11 +102,12 @@ function generateQRCode(inputName, firmwareType, qrElement) {
       finalQRImage.addEventListener("click", function () {
         const downloadLink = document.createElement("a");
         downloadLink.href = qrWithBackground;
-        downloadLink.download = firmwareType + "_" + inputName.trim() + "_qr.png";
+        downloadLink.download =
+          firmwareType + "_" + inputName.trim() + "_qr.png";
         downloadLink.click();
       });
     } else {
       qrElement.style.display = "none";
     }
-  }, 0)
+  }, 0);
 }
