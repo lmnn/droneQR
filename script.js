@@ -26,10 +26,11 @@ function showLoader() {
 function generateQRCode(inputName, firmwareType, qrElement) {
   let bgColor = "ffffff00"; // QS Transparent background
   let bgImageDataColor = 0;
-
+  let x = 10; //shift qr to the right for Qicksilver
   if (firmwareType === "Betaflight") {
     bgColor = "00ff00"; // BF Green background
     bgImageDataColor = 4278255360;
+    x = 0;
   }
 
   const canvas = document.createElement("canvas");
@@ -56,7 +57,7 @@ function generateQRCode(inputName, firmwareType, qrElement) {
     ctx.textRendering = "optimizeSpeed";
     ctx.font = selectedFont;
     ctx.fillStyle = "white";
-    ctx.fillText(inputName, 76, 42, 208);
+    ctx.fillText(inputName, 76 + x, 42, 208 - x);
 
     // Get pixel data from canvas
     const data32 = new Uint32Array(
@@ -80,12 +81,12 @@ function generateQRCode(inputName, firmwareType, qrElement) {
   }
 
   // Draw QR code on the canvas
-  ctx.drawImage(generatedQr.image, 0, 0);
+  ctx.drawImage(generatedQr.image, x, 0);
 
   // Create a new image from the canvas data
   setTimeout(() => {
     // Draw QR code on the canvas again in case gpu wasn't done with the process the first time
-    ctx.drawImage(generatedQr.image, 0, 0);
+    ctx.drawImage(generatedQr.image, x, 0);
     const qrWithBackground = canvas.toDataURL();
     // Create a new image element with the QR code and background
     const finalQRImage = new Image();
