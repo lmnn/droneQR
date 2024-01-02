@@ -1,10 +1,18 @@
 document.getElementById("qrForm").addEventListener("submit", function (event) {
-  event.preventDefault();
+    event.preventDefault();
+    handleSubmit();
+  });
 
+document.getElementById("fontSelection").addEventListener("keypress", function (event) {
+  event.preventDefault();
+  if (event.key==='Enter' | event.code==='Enter') {
+    handleSubmit();
+  }
+});
+
+function handleSubmit() {
   const inputName = document.getElementById("nameInput").value;
-  const firmwareType = document.querySelector(
-    'input[name="firmware"]:checked'
-  ).value;
+  const firmwareType = document.querySelector('input[name="firmware"]:checked').value;
   const qrElement = document.getElementById("qrcode");
 
   if (inputName.trim() !== "") {
@@ -15,7 +23,7 @@ document.getElementById("qrForm").addEventListener("submit", function (event) {
     qrElement.style.display = "none";
     alert("Please enter a name!");
   }
-});
+}
 
 function showLoader() {
   const qrElement = document.getElementById("qrcode");
@@ -26,7 +34,7 @@ function showLoader() {
 function generateQRCode(inputName, firmwareType, qrElement) {
   let bgColor = "ffffff00"; // QS Transparent background
   let bgImageDataColor = 0;
-  let x = 10; //shift qr to the right for Qicksilver
+  let x = 10; //shift QR to the right for Quicksilver
   if (firmwareType === "Betaflight") {
     bgColor = "00ff00"; // BF Green background
     bgImageDataColor = 4278255360;
