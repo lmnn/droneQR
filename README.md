@@ -1,7 +1,7 @@
 # droneQR
 
 
-![image](https://github.com/lmnn/droneQR/assets/5864652/aee0faa1-45ca-4d02-976d-cfe4526a2be0)
+![image](https://github.com/lmnn/droneQR/assets/5864652/058801a6-b970-4419-b996-e04087a9f00b)
 
 
 
