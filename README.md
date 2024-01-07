@@ -6,7 +6,7 @@
 
 
 
-QR custom logo generator for Betaflight and Quicksilver OSD. A green image background is needed for Betaflight, transparent - for Quicksilver.
+QR custom logo generator for laptimer. A green image background is needed for Betaflight, transparent - for Quicksilver.
 
 Hosted here
 https://qrwhoop.000webhostapp.com/
