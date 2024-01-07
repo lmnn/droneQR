@@ -34,7 +34,7 @@ function showLoader() {
 function generateQRCode(inputName, firmwareType, qrElement) {
   let bgColor = "ffffff00"; // QS Transparent background
   let bgImageDataColor = 0;
-  let x = 10; //shift QR to the right for Quicksilver
+  let x = 12; //shift QR to the right for Quicksilver
   if (firmwareType === "Betaflight") {
     bgColor = "00ff00"; // BF Green background
     bgImageDataColor = 4278255360;
@@ -111,8 +111,7 @@ function generateQRCode(inputName, firmwareType, qrElement) {
       finalQRImage.addEventListener("click", function () {
         const downloadLink = document.createElement("a");
         downloadLink.href = qrWithBackground;
-        downloadLink.download =
-          firmwareType + "_" + inputName.trim() + "_qr.png";
+        downloadLink.download = inputName.trim() + "_" + firmwareType + "_qr.png";
         downloadLink.click();
       });
     } else {
