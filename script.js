@@ -10,17 +10,46 @@ document.getElementById("fontSelection").addEventListener("keypress", function (
   }
 });
 
+document.getElementById("bfInput").addEventListener("change", function (event) {
+  handleInput();
+});
+document.getElementById("qsInput").addEventListener("change", function (event) {
+  handleInput();
+});
+document.getElementById("fontSelection").addEventListener("change", function (event) {
+  handleInput();
+});
+document.getElementById("hideName").addEventListener("change", function (event) {
+  handleInput();
+});
+
+function handleInput() {
+  const inputName = document.getElementById("nameInput").value;
+  const qrElement = document.getElementById("qrcode");
+  const downlText = document.getElementById("downloadText");
+  
+  //ignore inputs if name is not provided
+  if (inputName.trim()) {
+    handleSubmit();
+  } else {
+      qrElement?.style.display === "block" ? qrElement.style.display = "none" : null;
+      downlText?.style.display === "block" ? downlText.style.display = "none" : null;
+  }
+}
+
 function handleSubmit() {
   const inputName = document.getElementById("nameInput").value;
   const firmwareType = document.querySelector('input[name="firmware"]:checked').value;
   const qrElement = document.getElementById("qrcode");
+  const downlText = document.getElementById("downloadText");
 
-  if (inputName.trim() !== "") {
+  if (inputName.trim()) {
     showLoader(); // Show spinner
-    generateQRCode(inputName, firmwareType, qrElement);
+    generateQRCode(inputName, firmwareType, qrElement, downlText);
   } else {
     // If the input is empty, hide the output image
     qrElement.style.display = "none";
+    downlText.style.display = "none";
     alert("Please enter a name!");
   }
 }
@@ -28,10 +57,10 @@ function handleSubmit() {
 function showLoader() {
   const qrElement = document.getElementById("qrcode");
   qrElement.style.display = "block";
-  qrElement.innerHTML = `<img class="w3-spin" src="qr.png" style="height:2rem;opacity:0.5">`;
+  qrElement.innerHTML = '<img class="w3-spin" src="qr.png" alt="" style="height:2rem;opacity:0.5">';
 }
 
-function generateQRCode(inputName, firmwareType, qrElement) {
+function generateQRCode(inputName, firmwareType, qrElement, downlText) {
   let bgColor = "ffffff00"; // QS Transparent background
   let bgImageDataColor = 0;
   let x = 12; //shift QR to the right for Quicksilver
@@ -106,7 +135,7 @@ function generateQRCode(inputName, firmwareType, qrElement) {
 
     if (inputName.trim() !== "") {
       qrElement.appendChild(finalQRImage);
-
+      
       // Enable download by clicking the QR code image
       finalQRImage.addEventListener("click", function () {
         const downloadLink = document.createElement("a");
@@ -114,8 +143,10 @@ function generateQRCode(inputName, firmwareType, qrElement) {
         downloadLink.download = inputName.trim() + "_" + firmwareType + "_qr.png";
         downloadLink.click();
       });
+      downlText.style.display = "block";
     } else {
       qrElement.style.display = "none";
+      downlText.style.display = "none";
     }
   }, 0);
 }
