@@ -7,10 +7,12 @@
 
 
 
-QR custom logo generator for laptimer. A green image background is needed for Betaflight, and a transparent one - for Quicksilver.
+A custom QR logo generator for a laptimer. A green image background is needed for [Betaflight](https://betaflight.com/) and a transparent one - for [QUICKSILVER](https://github.com/BossHobby/QUICKSILVER). Generate logo and upload it to Your drone using Betaflight or QUICKSILVER configurator.
 
 Hosted here:
 https://qrwhoop.000webhostapp.com/
 
 Aternative URL:
 https://www.racer.lt/help/qrwhoop.html
+
+The app can run locally, just download the code files and open 'index.html' in Your browser!
