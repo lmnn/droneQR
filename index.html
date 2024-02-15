@@ -12,57 +12,61 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
-<body class="w3-dark-gray" 
-style="background-image: url('art.jpg'); background-repeat: repeat-y; background-size: cover;">
-<div class="w3-container w3-center w3-theme-d2">
-  <h1 class="w3-hide-small">Whoop QR Code Generator</h1>
-  <img src="whoop.png" alt="" class="w3-image w3-opacity-max w3-padding-16" style="width: 3rem; height: auto;">
-</div>
-
-<div class="w3-container w3-padding-16 w3-auto" style="max-width: 40rem;">
-  <form id="qrForm">
-    <div>
-      <label class="w3-text-white" for="nameInput"><b>Enter Name:</b></label>
-      <input class="w3-input" type="text" id="nameInput" autofocus maxlength="16" autocomplete="off" spellcheck="false">
-    </div>
-    <div class="w3-row">
-      <div class="w3-quarter w3-center">
-        <label for="bfInput"><img src="Betaflight.svg" alt="Betaflight" class="w3-image w3-padding-16 w3-margin-top"
-            style="width: 3rem; height: auto;"></label>
-        <input class="w3-radio" id="bfInput" type="radio" name="firmware" value="Betaflight" checked>
-      </div>
-      <div class="w3-quarter w3-center">
-        <label for="qsInput"><img src="Quicksilver.svg" alt="Quicksilver" class="w3-image w3-padding-16 w3-margin-top"
-            style="width: 3rem; height: auto;"></label>
-        <input class="w3-radio" id="qsInput" type="radio" name="firmware" value="Quicksilver">
-      </div>
-      
-      <div class="w3-quarter w3-center w3-container w3-margin-top">
-        <label class="w3-label w3-text-white" for="fontSelection">Select font</label>
-        <b><select class="w3-select w3-text-theme" id="fontSelection">
-          <option value="24px DePixel">Pixel</option>
-          <option value="24px large9">Large</option>
-          <option value="28px system-ui">System UI</option>
-          <option value="32px Verdana">Verdana</option>
-        </select></b>
-      </div>
-
-      <div class="w3-quarter w3-container w3-center w3-margin-top">
-        <label class="w3-label w3-text-white w3-center " for="hideName">Hide Name</label>
-        <input class="w3-check" type="checkbox" id="hideName">
-      </div>
-    </div>
-    <div>
-      <button type="submit" class="w3-btn w3-input w3-theme-d2 w3-large w3-margin-top w3-border-0">
-        Generate QR</button>
-    </div>
-  </form>
-
-  <div id="qrcode" class="w3-image w3-btn w3-margin-top w3-bar" style="display: none;">
-    <script src="script.js"></script>
+<body class="w3-dark-gray"
+  style="background-image: url('art.jpg'); background-repeat: repeat-y; background-size: cover;">
+  <div class="w3-container w3-center w3-theme-d2">
+    <h1 class="w3-hide-small">Whoop QR Code Generator</h1>
+    <a href="https://github.com/lmnn/droneQR" id="github-link">
+      <img src="whoop.png" alt="" class="w3-image w3-opacity-max w3-padding-16" style="width: 3rem; height: auto;">
+    </a>
   </div>
-  <p id="downloadText" class="w3-opacity w3-center" style="display: none;">Click QR to download</p>
-</div>
+
+  <div class="w3-container w3-padding-16 w3-auto" style="max-width: 40rem;">
+    <form id="qrForm">
+      <div>
+        <label class="w3-text-white" for="nameInput"><b>Enter Name:</b></label>
+        <input class="w3-input" type="text" id="nameInput" autofocus maxlength="16" autocomplete="off"
+          spellcheck="false">
+      </div>
+      <div class="w3-row">
+        <div class="w3-quarter w3-center">
+          <label for="bfInput"><img src="Betaflight.svg" alt="Betaflight" class="w3-image w3-padding-16 w3-margin-top"
+              style="width: 3rem; height: auto;"></label>
+          <input class="w3-radio" id="bfInput" type="radio" name="firmware" value="Betaflight" checked>
+        </div>
+        <div class="w3-quarter w3-center">
+          <label for="qsInput"><img src="Quicksilver.svg" alt="Quicksilver" class="w3-image w3-padding-16 w3-margin-top"
+              style="width: 3rem; height: auto;"></label>
+          <input class="w3-radio" id="qsInput" type="radio" name="firmware" value="Quicksilver">
+        </div>
+
+        <div class="w3-quarter w3-center w3-container w3-margin-top">
+          <label class="w3-label w3-text-white" for="fontSelection">Select font</label>
+          <b><select class="w3-select w3-text-theme" id="fontSelection">
+              <option value="24px DePixel">Pixel</option>
+              <option value="24px large9">Large</option>
+              <option value="28px system-ui">System UI</option>
+              <option value="32px Verdana">Verdana</option>
+            </select></b>
+        </div>
+
+        <div class="w3-quarter w3-container w3-center w3-margin-top">
+          <label class="w3-label w3-text-white w3-center " for="hideName">Hide Name</label>
+          <input class="w3-check" type="checkbox" id="hideName">
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="w3-btn w3-input w3-theme-d2 w3-large w3-margin-top w3-border-0">
+          Generate QR</button>
+      </div>
+    </form>
+
+    <div id="qrcode" class="w3-image w3-btn w3-margin-top w3-bar" style="display: none;">
+      <script src="script.js"></script>
+    </div>
+    <p id="downloadText" class="w3-opacity w3-center" style="display: none;">Click QR to download</p>
+  </div>
 
 </body>
+
 </html>
